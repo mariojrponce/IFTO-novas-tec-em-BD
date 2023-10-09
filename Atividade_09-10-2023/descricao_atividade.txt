@@ -1,0 +1,30 @@
+Atividade 09 de Outubro
+
+Aberto: segunda, 9 out 2023, 00:00
+
+
+Considere uma construtora que cadastra clientes, engenheiros, arquitetos e os materiais usados em suas obras. Considere ainda que os projetos para um cliente são elaborados por um arquiteto e executados por um engenheiro e utilizam uma lista de materiais.  
+
+Utilizando o formato do arquivo anexado, crie esse banco de dados não relacional utilizando o MongoDB, preencha as coleções e faça as seguintes consultas
+
+1 - busca um cliente por CPF 
+
+2 - busca clientes de uma determinada cidade
+
+3 - busca clientes que têm mais um projeto no seu nome
+
+4 - buscar os engenheiros com salário entre 5000 e 10000
+
+5 - Retornar a média de salário dos arquitetos por cidade
+
+6 - Retornar a quantidade de projetos de um determinado engenheiro
+
+7 - Encontrar Projetos com Data de Início Anterior a "2023-11-01" e Valor Entre 50000 e 100000
+
+8 - Encontrar Projetos com Status "Em Execução" e Valor Maior que 100000
+
+9 - Encontrar Projetos com Mais de 5 Materiais
+
+10 - retornar o nome de todos os arquitetos dos projetos que já foram concluídos.
+
+Estudo de caso - Construtora.txt Estudo de caso - Construtora.txt9 outubro 2023, 19:18

@@ -1,0 +1,127 @@
+-------------------------------------------------------------------------------------------
+Coleção Cliente
+-------------------------------------------------------------------------------------------
+{
+  "_id": ObjectId("5d6a36246e442a674f8561f2"),
+  "nome": "João da Silva",
+  "endereco": {
+    "rua": "Rua das Flores, 123",
+    "cidade": "Cidade do Cliente",
+    "estado": "Estado do Cliente",
+    "cep": "12345-678"
+  },
+  "telefone": "+55 11 1234-5678",
+  "cpf": "123.456.789-01",
+  "quantProjetos": 1
+}
+
+-------------------------------------------------------------------------------------------
+Coleção Engenheiro
+-------------------------------------------------------------------------------------------
+
+use construtoraDB; // Certifique-se de estar usando seu banco de dados
+
+// Coleção de Engenheiros
+db.createCollection("engenheiros");
+
+db.engenheiros.insertOne({
+  nome: "Nome do Engenheiro",
+  endereco: {
+    rua: "Rua do Engenheiro",
+    cidade: "Cidade do Engenheiro",
+    estado: "Estado do Engenheiro",
+    cep: "CEP do Engenheiro"
+  },
+  telefone: "Telefone do Engenheiro",
+  registro_conselho: "Número do Registro no Conselho de Engenharia",
+  cpf: "CPF do Engenheiro",
+  comissao: [
+    {
+      id_projeto: ObjectId("5d6a36246e442a674f8561f5"), // Substitua pelo ID do projeto
+      valor: 1000.0 // Valor da comissão para este projeto
+    },
+    // Adicione mais projetos e comissões conforme necessário
+  ]
+});
+
+-------------------------------------------------------------------------------------------
+Coleção Arquiteto
+-------------------------------------------------------------------------------------------
+use construtoraDB; // Certifique-se de estar usando seu banco de dados
+
+// Coleção de Arquitetos
+db.createCollection("arquitetos");
+
+db.arquitetos.insertOne({
+  nome: "Nome do Arquiteto",
+  endereco: {
+    rua: "Rua do Arquiteto",
+    cidade: "Cidade do Arquiteto",
+    estado: "Estado do Arquiteto",
+    cep: "CEP do Arquiteto"
+  },
+  telefone: "Telefone do Arquiteto",
+  registro_conselho: "Número do Registro no Conselho de Arquitetura",
+  cpf: "CPF do Arquiteto",
+  comissao: [
+    {
+      id_projeto: ObjectId("5d6a36246e442a674f8561f5"), // Substitua pelo ID do projeto
+      valor: 1200.0 // Valor da comissão para este projeto
+    },
+    // Adicione mais projetos e comissões conforme necessário
+  ]
+});
+
+-------------------------------------------------------------------------------------------
+Coleção Material
+-------------------------------------------------------------------------------------------
+{
+  "_id": ObjectId("5d6a36246e442a674f8561f6"),
+  "id": 1,
+  "descricao": "Cimento Portland",
+  "unidade": "Saco",
+  "preco_por_unidade": 20.99
+}
+
+-------------------------------------------------------------------------------------------
+Coleção Projeto
+-------------------------------------------------------------------------------------------
+use construtoraDB; // Certifique-se de estar usando seu banco de dados
+
+// Coleção de Projetos
+db.createCollection("projetos");
+
+db.projetos.insertOne({
+  nome: "Nome do Projeto",
+  data_criacao: ISODate("2023-10-09T00:00:00Z"),
+  data_inicio: ISODate("2023-10-10T00:00:00Z"),
+  previsao_termino: ISODate("2023-12-31T00:00:00Z"),
+  cliente: {
+    nome: "Nome do Cliente",
+    cpf: "CPF do Cliente"
+  },
+  engenheiro_responsavel: {
+    nome: "Nome do Engenheiro",
+    cpf: "CPF do Engenheiro"
+  },
+  arquiteto_responsavel: {
+    nome: "Nome do Arquiteto",
+    cpf: "CPF do Arquiteto"
+  },
+  materiais: [
+    {
+      id: 1,
+      descricao: "Cimento Portland",
+      unidade: "Saco",
+      preco_por_unidade: 20.99
+    },
+    {
+      id: 2,
+      descricao: "Tijolos",
+      unidade: "Milheiro",
+      preco_por_unidade: 450.0
+    }
+  ],
+  valor_do_projeto: 150000.0,
+  status: "Em análise" // Adicione o campo "status" com valor inicial
+});
