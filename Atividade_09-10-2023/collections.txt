@@ -1,0 +1,3 @@
+
+db.clientes.insertOne({nome:"João da Silva",endereco: {rua: "Rua das Flores, 123",cidade: "Cidade do Cliente",estado: "Estado do Cliente",cep: "12345-678"},  telefone: "+55 11 1234-5678",cpf: "123.456.789-01",quantProjetos: 1})
+

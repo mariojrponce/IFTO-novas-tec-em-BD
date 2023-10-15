@@ -8,23 +8,108 @@ Considere uma construtora que cadastra clientes, engenheiros, arquitetos e os ma
 Utilizando o formato do arquivo anexado, crie esse banco de dados não relacional utilizando o MongoDB, preencha as coleções e faça as seguintes consultas
 
 1 - busca um cliente por CPF 
+    Resposta: db.clientes.find({"cpf": "123.456.789-01"})
 
 2 - busca clientes de uma determinada cidade
+    Resposta: db.clientes.find({"endereco.cidade": "Cidade do Cliente"})
 
 3 - busca clientes que têm mais um projeto no seu nome
+    Resposta:   
+        db.projetos.aggregate([
+            {
+                $group: {
+                _id: "$cliente.nome",
+                count: { $sum: 1 }
+                }
+            },
+            {
+                $match: {
+                count: { $gt: 1 }
+                }
+            },
+            {
+                $project: {
+                cliente: "$_id",
+                _id: 0
+                }
+            }
+            ]);
 
 4 - buscar os engenheiros com salário entre 5000 e 10000
+    Resposta: 
+        db.engenheiros.find({ "comissao.valor": { $gte: 5000, $lte: 10000 } })
+
 
 5 - Retornar a média de salário dos arquitetos por cidade
+    Resposta: 
+        db.arquitetos.aggregate([
+            {
+                $group: {
+                _id: "$endereco.cidade",
+                mediaValor: {
+                    $avg: { $sum: "$comissao.valor" }
+                }
+                }
+            }
+            ]);
 
 6 - Retornar a quantidade de projetos de um determinado engenheiro
+    Resposta:
+    db.engenheiros.aggregate([
+    {
+        $match: {
+        nome: "Nome do Engenheiro" // Substitua pelo nome do engenheiro desejado
+        }
+    },
+    {
+        $project: {
+        quantidadeProjetos: { $size: "$comissao" }
+        }
+    }
+    ]);
 
 7 - Encontrar Projetos com Data de Início Anterior a "2023-11-01" e Valor Entre 50000 e 100000
+    Resposta: 
+    db.projetos.find({
+        data_inicio: { $lt: ISODate("2023-11-01") },
+        valor: { $gte: 50000, $lte: 100000 }
+    });
 
 8 - Encontrar Projetos com Status "Em Execução" e Valor Maior que 100000
+    Resposta: 
+        db.projetos.find({
+            status: "Em Execução",
+            valor: { $gt: 100000 }
+        });
 
 9 - Encontrar Projetos com Mais de 5 Materiais
+    Resposta: 
+    db.projetos.find({
+        quantidade_materiais: { $gt: 5 }
+    });
 
 10 - retornar o nome de todos os arquitetos dos projetos que já foram concluídos.
-
-Estudo de caso - Construtora.txt Estudo de caso - Construtora.txt9 outubro 2023, 19:18
+    Resposta:
+    db.projetos.aggregate([
+    {
+        $match: {
+        status: "Concluído"
+        }
+    },
+    {
+        $lookup: {
+        from: "arquitetos",
+        localField: "id_arquiteto",
+        foreignField: "_id",
+        as: "arquiteto"
+        }
+    },
+    {
+        $unwind: "$arquiteto"
+    },
+    {
+        $project: {
+        nome_arquiteto: "$arquiteto.nome"
+        }
+    }
+    ]);
