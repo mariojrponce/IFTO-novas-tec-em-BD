@@ -1,0 +1,60 @@
+CREATE (c:cliente {Nome: “João”, Id: 1, CPF: "123123123", idade:25})
+CREATE (c:cliente {Nome: "José", Id: 2, CPF: "321312312", idade:22})
+CREATE (c:cliente {Nome: "Ana", Id: 3, CPF:"234234234", idade:38})
+CREATE (c:cliente {Nome: "Maria", Id: 4, CPF:"543534555", idade:21})
+CREATE (c:cliente {Nome: "Helena", Id: 5, CPF:"567567567", idade:35})
+CREATE (c:cliente {Nome: "Carminha", Id: 6, CPF:"987978978", idade:28})
+
+CREATE (v:vendedor {Nome: "Alberto", Id: 1, comissao:0})
+CREATE (v:vendedor {Nome: "Cláudia", Id: 2, comissao:0})
+CREATE (v:vendedor {Nome: "Roberta", Id: 3, comissao:0})
+
+CREATE (p1:produto_aula {Nome: "Farinha", Id: 1, valor:10})
+CREATE (p2:produto_aula {Nome: "Sal grosso", Id: 2, valor:3})
+CREATE (p3:produto_aula {Nome: "Carvão", Id: 3, valor:8})
+CREATE (p4:produto_aula {Nome: "Picanha", Id: 4, valor:39})
+CREATE (p5:produto_aula {Nome: "Fraldinha", Id: 5, valor:25})
+CREATE (p6:produto_aula {Nome: "Cupim", Id: 6, valor:25})
+CREATE (p7:produto_aula {Nome: "Cerveja", Id: 7, valor:7})
+CREATE (p8:produto_aula {Nome: "Suco natural", Id: 21, valor:11})
+CREATE (p9:produto_aula {Nome: "Limão", Id: 8, valor:1})
+CREATE (p10:produto_aula {Nome: "Pão de alho", Id: 9, valor:9})
+CREATE (p11:produto_aula {Nome: "Espeto", Id: 10, valor:3})
+CREATE (p12:produto_aula {Nome: "Coração de frango", Id: 11, valor:23})
+CREATE (p13:produto_aula {Nome: "Coxinha da asa", Id: 12, valor:13})
+CREATE (p14:produto_aula {Nome: "Arroz", Id: 13, valor:14})
+CREATE (p15:produto_aula {Nome: "Cebola", Id: 14, valor:4})
+CREATE (p16:produto_aula {Nome: "Tomate", Id: 15, valor:5})
+CREATE (p17:produto_aula {Nome: "Cheiro Verde", Id: 16, valor:2})
+CREATE (p18:produto_aula {Nome: "Linguiça toscana", Id: 17, valor:15})
+CREATE (p19:produto_aula {Nome: "Costela suína", Id: 18, valor:16})
+CREATE (p20:produto_aula {Nome: "Queijo coalho", Id: 19, valor:11})
+CREATE (p21:produto_aula {Nome: "Mandioca", Id: 20, valor:4})
+
+CREATE (s1:venda {Id: 1, valor:0})
+CREATE (s2:venda {Id: 2, valor:0})
+CREATE (s3:venda {Id: 3, valor:0})
+CREATE (s4:venda {Id: 4, valor:0})
+
+match(c:cliente_aula {Nome:"João"})
+match(v:vendedor_aula {Nome: "Alberto"})
+match(s:venda_aula {Id:1})
+match(p1:produto_aula {Nome: "Tomate"})
+match(p2:produto_aula {Nome: "Cebola"})
+match(p3:produto_aula {Nome: "Arroz"})
+
+CREATE (p1)-[i1:itemVenda_aula {Quant: 5, Parcial: p1.valor*5}]->(s)
+CREATE (p2)-[i2:itemVenda_aula {Quant: 3, Parcial: p2.valor*3}]->(s)
+CREATE (p3)-[i3:itemVenda_aula {Quant: 1, Parcial: p3.valor*1}]->(s)
+
+CREATE (s)-[c1:cli_aula {Data: "2020-04-28"}]->(c)
+CREATE (v)-[v1:vend_aula {Data: "2020-04-28"}]->(s)
+
+MATCH (p:produto)-[i:item]->(s:venda) 
+
+return sum(i.Parcial)
+
+
+
+
+
